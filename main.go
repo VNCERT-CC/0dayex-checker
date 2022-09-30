@@ -127,7 +127,7 @@ func goCall(w webview2.WebView, name, params string) ([]byte, error) {
 			return nil, err
 		}
 		if !passed {
-			return nil, errors.New(`Firewall chưa được cập nhật để chặn chuỗi trên URL: <span style="font-weight:bold; color: green">/autodiscover/autodiscover.json?@</span><br>Vui lòng cập nhật firewall để ngăn chặn cuộc tấn công.<br>Tham khảo: <a href="https://www.gteltsc.vn/blog/canh-bao-chien-dich-tan-cong-su-dung-lo-hong-zero-day-tren-microsoft-exchange-server-12714.html" target="_blank">Hướng dẫn</a>`)
+			return nil, errors.New(`Firewall chưa được cập nhật để chặn chuỗi trên URL: <span style="font-weight:bold; color: green">/autodiscover/autodiscover.json?@</span><br>Vui lòng cập nhật firewall để ngăn chặn cuộc tấn công.<br>Tham khảo: <a href="https://msrc-blog.microsoft.com/2022/09/29/customer-guidance-for-reported-zero-day-vulnerabilities-in-microsoft-exchange-server/" target="_blank">Hướng dẫn</a>`)
 		}
 	}
 	// kiểm tra file system
