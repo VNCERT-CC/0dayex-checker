@@ -1,0 +1,38 @@
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+
+    - name: Build
+      run: |
+        go mod tidy
+        GOOS=windows GOARCH=amd64 go build -o 0dayex-checker-win64.exe -v ./...
+        GOOS=windows GOARCH=386 go build -o 0dayex-checker-win32.exe -v ./...
+
+    # Create release
+    - name: Generate release tag
+      id: tag
+      run: |
+        echo "::set-output name=release_tag::ActionBuild_$(date +"%Y.%m.%d_%H-%M-%S")"
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        files: |
+          ./0dayex-checker-*
+    # Done release
