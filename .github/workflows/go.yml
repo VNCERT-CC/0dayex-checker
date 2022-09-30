@@ -23,6 +23,7 @@ jobs:
         go mod tidy
         GOOS=windows GOARCH=amd64 go build -o 0dayex-checker-win64.exe -v ./...
         GOOS=windows GOARCH=386 go build -o 0dayex-checker-win32.exe -v ./...
+        sha256sum 0dayex-checker* > checksum.txt
 
     # Create release
     - name: Generate release tag
@@ -32,6 +33,8 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
+        body_path: checksum.txt
+        append_body: true
         tag_name: ${{ steps.tag.outputs.release_tag }}
         files: |
           ./0dayex-checker-*
