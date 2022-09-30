@@ -245,15 +245,14 @@ func main() {
 							if (checking) return
 
 							url.value = url.value.trim()
-
-							if (url.value.startsWith('//')) url.value = 'http:'+url.value
-							if (!/^https?:\/\//.test(url.value)) url.value = 'http://'+url.value
-
 							if (!url.value) {
 								msg.innerText = 'Vui lòng nhập Địa chỉ website!'
 								msg.style.color = 'blue'
 								return
 							}
+							if (url.value.startsWith('//')) url.value = 'http:'+url.value
+							if (!/^https?:\/\//.test(url.value)) url.value = 'http://'+url.value
+
 							checking = true
 							msg.innerText = 'Đang kiểm tra..'
 							msg.style.color = 'blue'
